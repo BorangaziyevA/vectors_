@@ -8,11 +8,11 @@ class vectors_
 	int size;
 public:
 	vectors_();
-	vectors_(int size,int value = 0);
+	vectors_(int size, int value = 0);
 	vectors_(const vectors_ & obj);
 	~vectors_();
 	void clear();
 	void pushBack(int z);
 	void print();
+	vectors_& operator=(const vectors_ &obj);
 };
-
