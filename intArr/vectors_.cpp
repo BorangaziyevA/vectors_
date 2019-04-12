@@ -81,3 +81,20 @@ void vectors_::print()
 	}
 	cout << endl;
 }
+
+vectors_ & vectors_::operator=(const vectors_ & obj)
+{
+	if (this == &obj)
+	{
+		return *this;
+	}
+	this->clear();
+	if (obj.size != 0)
+	{
+		this->size = obj.size;
+		this->arr = new int[this->size];
+		for (size_t i = 0; i < this->size; i++)
+			this->arr[i] = obj.arr[i];
+	}
+	return *this;
+}
