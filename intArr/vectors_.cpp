@@ -73,7 +73,7 @@ void vectors_::pushBack(int z)
 	this->arr = tmp;
 }
 
-void vectors_::print()
+void vectors_::print()const
 {
 	for (size_t i = 0; i < this->size; i++)
 	{
@@ -98,3 +98,80 @@ vectors_ & vectors_::operator=(const vectors_ & obj)
 	}
 	return *this;
 }
+
+vectors_ & vectors_::operator++()
+{
+	this->size++;
+	int *tmp;
+	tmp = new int[size];
+	for (size_t i = 0; i < size -1; i++)
+	{
+		tmp[i] = this->arr[i];
+	}
+	tmp[size - 1] = 0;
+	delete[] arr;
+	arr = tmp;
+	return  *this;
+}
+
+vectors_ vectors_::operator++(int)
+{
+
+	vectors_ a = *this;
+	this->size++;
+	int *tmp;
+	tmp = new int[size];
+	for (size_t i = 0; i < size - 1; i++)
+	{
+		tmp[i] = this->arr[i];
+	}
+	tmp[size - 1] = 0;
+	delete[] arr;
+	arr = tmp;
+	return a;
+}
+
+vectors_ & vectors_::operator--()
+{
+	this->size--;
+	int *tmp;
+	tmp = new int[size];
+	for (size_t i = 0; i < size; i++)
+	{
+		tmp[i] = this->arr[i];
+	}
+	delete[] arr;
+	arr = tmp;
+	return  *this;
+}
+
+vectors_ vectors_::operator--(int)
+{
+
+	vectors_ a = *this;
+	this->size--;
+	int *tmp;
+	tmp = new int[size];
+	for (size_t i = 0; i < size; i++)
+	{
+		tmp[i] = this->arr[i];
+	}
+	delete[] arr;
+	arr = tmp;
+	return a;
+}
+
+ostream & operator<<(ostream & os, const vectors_ & obj)
+{
+	obj.print();
+	return os;
+}
+
+//istream & operator>>(istream & is, vectors_ & obj)
+//{
+//	int h;
+//	for (size_t i = 0; i < obj.; i++)
+//	{
+//
+//	}
+//}
