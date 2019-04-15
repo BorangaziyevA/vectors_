@@ -13,6 +13,13 @@ public:
 	~vectors_();
 	void clear();
 	void pushBack(int z);
-	void print();
+	void print()const;
 	vectors_& operator=(const vectors_ &obj);
+	vectors_& operator++();
+	vectors_ operator++(int);
+	vectors_& operator--();
+	vectors_ operator--(int);
 };
+
+ostream& operator<<(ostream& os, const vectors_& obj);
+//istream& operator>>(istream& is, vectors_& obj);
