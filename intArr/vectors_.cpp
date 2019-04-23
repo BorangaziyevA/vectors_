@@ -52,6 +52,23 @@ void vectors_::clear()
 	}
 }
 
+int vectors_::getSize()const
+{
+	return this->size;
+}
+
+int vectors_::getElement(int x)const
+{
+	if(x >= 0 && x <this->size)
+	return this->arr[x];
+
+}
+
+void vectors_::changeElement(int x,int pos)
+{
+	this->arr[pos] = x;
+}
+
 void vectors_::pushBack(int z)
 {
 	if (this->size == 0)
@@ -101,34 +118,21 @@ vectors_ & vectors_::operator=(const vectors_ & obj)
 
 vectors_ & vectors_::operator++()
 {
-	this->size++;
-	int *tmp;
-	tmp = new int[size];
-	for (size_t i = 0; i < size -1; i++)
+	for (size_t i = 0; i < size; i++)
 	{
-		tmp[i] = this->arr[i];
+		arr[i]++;
 	}
-	tmp[size - 1] = 0;
-	delete[] arr;
-	arr = tmp;
-	return  *this;
+	return *this;
 }
 
 vectors_ vectors_::operator++(int)
 {
-
-	vectors_ a = *this;
-	this->size++;
-	int *tmp;
-	tmp = new int[size];
-	for (size_t i = 0; i < size - 1; i++)
+	vectors_ tmp = *this;
+	for (size_t i = 0; i < size; i++)
 	{
-		tmp[i] = this->arr[i];
+		arr[i]++;
 	}
-	tmp[size - 1] = 0;
-	delete[] arr;
-	arr = tmp;
-	return a;
+	return tmp;
 }
 
 vectors_ & vectors_::operator--()
@@ -167,11 +171,63 @@ ostream & operator<<(ostream & os, const vectors_ & obj)
 	return os;
 }
 
-//istream & operator>>(istream & is, vectors_ & obj)
+istream & operator>>(istream & is, vectors_ & obj)
+{
+	int h;
+	cout << "Fill the vector" << endl;
+	for (size_t i = 0; i < obj.getSize(); i++)
+	{
+		cin >> h;
+		obj.changeElement(h, i);
+	}
+	return is;
+}
+
+bool operator==(const vectors_ & a, const vectors_ & b)
+{
+	if (a.getSize() != b.getSize())
+	{
+		return false;
+	}
+	for (size_t i = 0; i < b.getSize(); i++)
+	{
+		if (a.getElement(i) != b.getElement(i))
+		{
+			return false;
+		}
+
+	}
+	return true;
+}
+
+//vectors_ & vectors_::operator++()
 //{
-//	int h;
-//	for (size_t i = 0; i < obj.; i++)
+//	this->size++;
+//	int *tmp;
+//	tmp = new int[size];
+//	for (size_t i = 0; i < size - 1; i++)
 //	{
-//
+//		tmp[i] = this->arr[i];
 //	}
+//	tmp[size - 1] = 0;
+//	delete[] arr;
+//	arr = tmp;
+//	return  *this;
+//}
+//
+//vectors_ vectors_::operator++(int)
+//{
+//
+//	vectors_ a = *this;
+//	this->size++;
+//	int *tmp;
+//	tmp = new int[size];
+//	for (size_t i = 0; i < size - 1; i++)
+//	{
+//		tmp[i] = this->arr[i];
+//	}
+//	tmp[size - 1] = 0;
+//	delete[] arr;
+//	arr = tmp;
+//	return a;
 //}
